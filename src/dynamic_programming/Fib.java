@@ -1,4 +1,4 @@
-package algobook.dynamic_programming;
+package dynamic_programming;
 
 /**
  * Created by ts250370 on 7/31/17.

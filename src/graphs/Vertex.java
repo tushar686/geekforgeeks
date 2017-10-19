@@ -1,23 +1,27 @@
-package algobook.graphs;
+package graphs;
 
 /**
  * Created by ts250370 on 7/28/17.
  */
 public class Vertex {
-    int label;
-    int[] adjacentVertices;
-    int treeEdges[];
-    int backEdges[];
-    int entryTime;
-    int exitTime;
-    boolean discovered;
-    boolean processed;
-    Vertex parent;
-    String color;
+    public int label;
+    public int[] adjacentVertices;
+    public int treeEdges[];
+    public int backEdges[];
+    public int entryTime;
+    public int exitTime;
+    public boolean discovered;
+    public boolean processed;
+    public Vertex parent;
+    public String color;
 
-    Vertex(int label) {
+    public Vertex(int label) {
         this.label = label;
         discovered = false;
+    }
+
+    public String toString() {
+        return (char)label + " " + discovered;
     }
 
 }

@@ -9,7 +9,7 @@ public class Node {
     Object data;
     int key;
     public Node leftChild;
-    public Node righChild;
+    public Node rightChild;
     public Node parent;
 
     public Node(Object data) {

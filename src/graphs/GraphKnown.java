@@ -1,4 +1,4 @@
-package algobook.graphs;
+package graphs;
 
 import java.util.Scanner;
 

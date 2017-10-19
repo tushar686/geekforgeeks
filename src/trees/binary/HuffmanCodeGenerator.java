@@ -45,7 +45,7 @@ public class HuffmanCodeGenerator {
             if (ch == '0') {
                 node = node.leftChild;
             } else {
-                node = node.righChild;
+                node = node.rightChild;
             }
             if (node.data != null) {
                 decode += node.data;
@@ -83,7 +83,7 @@ public class HuffmanCodeGenerator {
         }
 
         preOrder(node.leftChild, code.concat("0"));
-        preOrder(node.righChild, code.concat("1"));
+        preOrder(node.rightChild, code.concat("1"));
     }
 
 
@@ -104,7 +104,7 @@ public class HuffmanCodeGenerator {
         newTree.insert(null, tree1.root.key + tree2.root.key);
 
         newTree.root.leftChild = tree1.root;
-        newTree.root.righChild = tree2.root;
+        newTree.root.rightChild = tree2.root;
 
         return newTree;
     }

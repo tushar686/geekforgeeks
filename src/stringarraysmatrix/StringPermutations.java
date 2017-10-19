@@ -1,4 +1,4 @@
-package stringarrays;
+package stringarraysmatrix;
 
 public class StringPermutations {
     public static void main(String args[]) {

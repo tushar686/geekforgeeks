@@ -61,6 +61,8 @@ public class TreeApp {
         System.out.println();
         traversal.doPostOrder();
         System.out.println();
+        traversal.doLevelOrder();
+        System.out.println();
 
         //find
         Node found = tree.find(11); System.out.println(found != null ? found.data : "key not found");

@@ -1,4 +1,4 @@
-package stringarrays;
+package stringarraysmatrix;
 
 
 public class UniqueCharWithBits {

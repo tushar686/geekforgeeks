@@ -1,4 +1,4 @@
-package stringarrays;
+package stringarraysmatrix;
 
 import java.util.Scanner;
 

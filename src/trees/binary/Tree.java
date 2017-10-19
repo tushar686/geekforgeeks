@@ -25,9 +25,9 @@ public class Tree {
                 current.leftChild = newNode;
             }
         } else {
-            insertNewNode(current.righChild, newNode);
+            insertNewNode(current.rightChild, newNode);
             if (newNode.parent == null) {
-                current.righChild = newNode;
+                current.rightChild = newNode;
             }
         }
         if (newNode.parent == null) {
@@ -55,7 +55,7 @@ public class Tree {
         if (key <= node.key) {
             return find(key, node.leftChild);
         } else {
-            return find(key, node.righChild);
+            return find(key, node.rightChild);
         }
     }
 
@@ -72,10 +72,10 @@ public class Tree {
                 return true;
             }
 
-            if (node.leftChild == null || node.righChild == null) { //single child (left or right); each may have their own subtree
+            if (node.leftChild == null || node.rightChild == null) { //single child (left or right); each may have their own subtree
                 Node child;
                 if (node.leftChild == null) {
-                    child = node.righChild;
+                    child = node.rightChild;
                 } else {
                     child = node.leftChild;
                 }
@@ -93,7 +93,7 @@ public class Tree {
 
 
     private void reArrangeSuccesor(Node node, Node successor) {
-        if (successor.righChild == null) {
+        if (successor.rightChild == null) {
             if (node.parent == null) { //for root node
                 root = successor;
                 root.parent = null;
@@ -103,13 +103,13 @@ public class Tree {
                 if (isOnLeftOfParent(successor)) {
                     successor.parent.leftChild = null;
                 } else {
-                    successor.parent.righChild = null;
+                    successor.parent.rightChild = null;
                 }
             }
         } else {
             node.key = successor.key;
             node.data = successor.data;   
-            reArrangeSingleChild(successor, successor.righChild);
+            reArrangeSingleChild(successor, successor.rightChild);
         }
     }
 
@@ -121,7 +121,7 @@ public class Tree {
             if (isOnLeftOfParent(node)) {
                 node.parent.leftChild = child;
             } else {
-                node.parent.righChild = child;
+                node.parent.rightChild = child;
             }
             child.parent = node.parent;
         }
@@ -135,7 +135,7 @@ public class Tree {
         if (node.parent.leftChild.equals(node)) {
             node.parent.leftChild = null;
         } else {
-            node.parent.righChild = null;
+            node.parent.rightChild = null;
         }
     }
 
@@ -144,11 +144,11 @@ public class Tree {
     }
 
     private boolean isLeafNode(Node node) {
-        return node.leftChild == null && node.righChild == null;
+        return node.leftChild == null && node.rightChild == null;
     }
 
     public Node successor(Node node) {
-        Node right = node.righChild;
+        Node right = node.rightChild;
         Node parent = right;
         Node leftOfRight = right.leftChild;
         while (leftOfRight != null) {

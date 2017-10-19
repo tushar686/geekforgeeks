@@ -1,4 +1,4 @@
-package algobook.graphs;
+package graphs;
 
 /**
  * Created by ts250370 on 8/1/17.

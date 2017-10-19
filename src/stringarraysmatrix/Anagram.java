@@ -1,4 +1,4 @@
-package stringarrays;
+package stringarraysmatrix;
 
 public class Anagram {
     public static void main(String[] args) {

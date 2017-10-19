@@ -1,4 +1,4 @@
-package stringarrays;
+package stringarraysmatrix;
 
 /**
  * Created by ts250370 on 8/15/17.
