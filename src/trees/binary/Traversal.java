@@ -1,5 +1,6 @@
 package trees.binary;
 
+import java.util.ArrayDeque;
 import java.util.Queue;
 
 /**
@@ -40,13 +41,13 @@ public class Traversal {
 
     public void doLevelOrder_1() {
         Node start = tree.root;
-        Queue q = new ArrayDeque();
+        Queue q = new ArrayDeque<>();
         q.add(start);
         levelOrder_1(q);
     }
 
     private void levelOrder_1(Queue q) {
-        Node node = q.poll();
+        Node node = (Node)q.poll();
         if (node == null) {
             return;
         }
