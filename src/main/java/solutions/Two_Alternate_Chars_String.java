@@ -1,10 +1,6 @@
-package hackerrank;
+package solutions;
 
-import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
 
 public class Two_Alternate_Chars_String {
 

@@ -1,9 +1,8 @@
-package hackerrank;
+package solutions;
 
 import java.util.*;
 import java.util.Map.Entry;
 import java.lang.*;
-import java.io.*;
 
 class FindDistinctTwoNumbers {
 	public static void main (String[] args) {

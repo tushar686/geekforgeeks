@@ -1,6 +1,4 @@
-package hackerrank;
-
-import java.util.Scanner;
+package solutions;
 
 class FindMaxIJForAiLessThanAj {
 	public static void main (String[] args) {

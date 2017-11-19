@@ -1,4 +1,4 @@
-package hackerrank.lrucache;
+package solutions.lrucache;
 
 // http://javatroops.blogspot.com/2012/11/lru-cache-implementation-o1.html
 //This is better https://alaindefrance.wordpress.com/2014/10/05/lru-cache-implementation/

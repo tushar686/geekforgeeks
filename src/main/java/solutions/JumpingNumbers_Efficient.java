@@ -1,4 +1,4 @@
-package hackerrank;
+package solutions;
 
 import java.util.ArrayDeque;
 import java.util.Scanner;

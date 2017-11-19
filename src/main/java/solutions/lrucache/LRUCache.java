@@ -1,4 +1,4 @@
-package hackerrank.lrucache;
+package solutions.lrucache;
 
 /**
  * Created by ts250370 on 11/13/17.

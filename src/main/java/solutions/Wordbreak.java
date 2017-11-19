@@ -1,8 +1,8 @@
-package hackerrank;
+package solutions;
 
-import java.util.*;
+import java.util.Scanner;
 
-class GFG {
+class Wordbreak {
 
     public static void main (String[] args) {
        Scanner sc = new Scanner(System.in);

@@ -1,4 +1,4 @@
-package hackerrank.lrucache;
+package solutions.lrucache;
 
 import java.util.*;
 
