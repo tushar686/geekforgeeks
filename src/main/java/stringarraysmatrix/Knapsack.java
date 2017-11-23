@@ -14,7 +14,7 @@ public class Knapsack {
     }
 
     public void knapsack(int [] weights, int[] values, int currentWeightIdx, int capacity) {
-        if (weights.length == 0 || capacity == 0) {
+        if (currentWeightIdx == 0 || capacity == 0) {
             return 0;
         }
         if (weights[currentWeightIdx-1] > capacity) {
@@ -25,6 +25,24 @@ public class Knapsack {
             values[currentWeightIdx-1] + knapsack(weights[currentWeightIdx-1], values, currentWeightIdx-1,  capacity-weights[currentWeightIdx-1]),
             knapsack(weights, values, currentWeightIdx-1, capacity)
         )
+    }
+
+    public void knapsack(int [] weights, int[] values, int currentWeightIdx, int capacity, int[][] memoization) {
+        if (memoization[currentWeightIdx][capacity] != 0) {
+            return memoization[currentWeightIdx][capacity];
+        }
+        if (currentWeightIdx == 0 || capacity == 0) {
+            return 0;
+        }
+        if (weights[currentWeightIdx-1] > capacity) {
+            return knapsack(weights, values, currentWeightIdx-1, capacity);
+        }
+
+        int include = values[currentWeightIdx-1] + knapsack(weights[currentWeightIdx-1], values, currentWeightIdx-1,  capacity-weights[currentWeightIdx-1]);
+        int exclude = knapsack(weights, values, currentWeightIdx-1, capacity);
+        int result = Math.max(include, exclude);
+        memoization[currentWeightIdx][capacity] = result;
+        return result;
     }
 
     public void knapsack(int [] weights, int[] values, int capacity) {
