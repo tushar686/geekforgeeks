@@ -12,7 +12,7 @@ public class SuffixTrie {
 
      public static void main(String []args){
          String [] words = new String[] {
-           "abcd"
+           "ablmncd", "lmn"
          };
          //, "abc", "lmn", "abgl"  
          

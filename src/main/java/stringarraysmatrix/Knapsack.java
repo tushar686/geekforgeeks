@@ -7,7 +7,41 @@ public class Knapsack {
 
     public static void main(String[] args) {
         Knapsack knapsack = new Knapsack();
-        knapsack.knapsack(new int[] {11, 4, 8, 6, 7, 5}, 20);
+        // knapsack.knapsack(new int[] {11, 4, 8, 6, 7, 5}, 20);
+        int[] weights = new int[] {10, 20, 30}
+        int[] values = new int[] {120, 220, 80}
+        knapsack.knapsack(weights, values, weights.length, 50);
+    }
+
+    public void knapsack(int [] weights, int[] values, int currentWeightIdx, int capacity) {
+        if (weights.length == 0 || capacity == 0) {
+            return 0;
+        }
+        if (weights[currentWeightIdx-1] > capacity) {
+            return knapsack(weights, values, currentWeightIdx-1, capacity);
+        }
+
+        Math.max(
+            values[currentWeightIdx-1] + knapsack(weights[currentWeightIdx-1], values, currentWeightIdx-1,  capacity-weights[currentWeightIdx-1]),
+            knapsack(weights, values, currentWeightIdx-1, capacity)
+        )
+    }
+
+    public void knapsack(int [] weights, int[] values, int capacity) {
+        int[][] k = new int[weights.length+1][capacity+1]
+
+        for (int i=0; i<weights.length; i++) {
+            for (int w=0; w<capacity+1; w++) {
+                if (i == 0 || w == 0) {
+                    k[i][w] = 0;
+                }
+                if (k[i-1][0] <= capacity) {
+                    k[i][w] = Math.max(values[i-1] + k[i-1][w - weights[i]], k[i-1][w])
+                } else {
+                    k[i][w] = k[i-1][w];
+                }
+            }
+        }
     }
 
     public void knapsack(int [] weights, int target) {

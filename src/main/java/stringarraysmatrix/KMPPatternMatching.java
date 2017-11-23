@@ -4,12 +4,14 @@ public class KMPPatternMatching {
 
     public static void main(String[] args) {
         KMPPatternMatching kmpPatternMatching = new KMPPatternMatching();
-        kmpPatternMatching.search("AAAA", "AAAAA");
-        kmpPatternMatching.search("ABCDABD", "ABC ABCDAB ABCDABCDABDE");
+//        kmpPatternMatching.search("AAAA", "AAAAA");
+//        kmpPatternMatching.search("ABCDABD", "ABC ABCDAB ABCDABCDABDE");
         kmpPatternMatching.search("ABCDABD", "ABCABCDABD ABCDABCDABDE");
-        kmpPatternMatching.search("ABCDE", "AABBABCDETUSH");
+//        kmpPatternMatching.search("ABCDE", "AABBABCDETUSH");
+//        kmpPatternMatching.search("AABAACAABAA", "AABBABCDETUSH");
+//        kmpPatternMatching.search("AABAACAABBB", "AABBABCDETUSH");
         // kmpPatternMatching.search("AABAACAABAA", "");
-        // kmpPatternMatching.search("AAACAAAAAC", "");
+//         kmpPatternMatching.search("AAACAAAAAC", "");
         // kmpPatternMatching.search("AAABAAA", "");
     }
 
@@ -51,7 +53,7 @@ public class KMPPatternMatching {
     }
 
     public int[] preProcessPattern(String pattern) {
-        int[] lps = new int[pattern.length()];
+        int[] lps = new int[pattern.length()]; //longest proper prefix which is also suffix
         lps[0] = 0;
         int j = 0;
         for (int i=1; i<pattern.length(); i++) {
