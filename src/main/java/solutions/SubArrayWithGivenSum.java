@@ -34,8 +34,10 @@ public class SubArrayWithGivenSum {
 //        int[] result = subArrayWithGivenSum.findSubArrayWithSum(new int[]{1, 2, 3, 7, 5}, 12, 0, 0, 0);
 //        int[] result = subArrayWithGivenSum.findSubArrayWithSum_efficient(new int[]{1, 2, 3, 7, 5}, 12);
 //        int[] result = subArrayWithGivenSum.findSubArrayWithSum(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 15, 0, 0, 0);
-        int[] result = subArrayWithGivenSum.findSubArrayWithSum_efficient(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 15);
-        System.out.println(result[0] + " " + result[1]);
+//        int[] result = subArrayWithGivenSum.findSubArrayWithSum_efficient(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 15);
+//        System.out.println(result[0] + " " + result[1]);
+        boolean hasGivenSum = subArrayWithGivenSum.findNonContinueousSubArrayWithSum(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 15, 0, 0);
+        System.out.println(hasGivenSum);
     }
 
     int[] findSubArrayWithSum(int[] arr, int givenSum, int sumTillNow, int startIndex, int endIndex) {
@@ -69,4 +71,17 @@ public class SubArrayWithGivenSum {
         }
         return new int[] {-1, -1};
     }
+
+    boolean findNonContinueousSubArrayWithSum(int[] arr, int givenSum, int sumTillNow, int endIndex) {
+        if (sumTillNow == givenSum) { //base condition
+            System.out.println(endIndex);
+            return true;
+        } else if(endIndex >= arr.length || sumTillNow > givenSum) {
+            return false;
+        }
+        return findNonContinueousSubArrayWithSum(arr, givenSum, sumTillNow + arr[endIndex], ++endIndex)
+                || findNonContinueousSubArrayWithSum(arr, givenSum, sumTillNow, ++endIndex);
+    }
+
+
 }

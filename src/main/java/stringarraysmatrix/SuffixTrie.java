@@ -5,67 +5,80 @@ import java.util.*;
 public class SuffixTrie {
 
     class Node {
-        Map<Character, Node> children;
+        Map<Character, Node> children = new HashMap<>();
         boolean endWord;
     }
     Node root = new Node();
 
      public static void main(String []args){
          String [] words = new String[] {
-           "ablmncd", "lmn"
+           "ablmclmnd", "lmn"
          };
          //, "abc", "lmn", "abgl"  
-         
+
+         String word = "ablmclmnd";
+
          SuffixTrie suffixTrie = new SuffixTrie();
-         for (String word : words) {
-             suffixTrie.insert(word);
+         for (int k=0; k<words.length; k++) {
+             word = words[k];
+             for (int i = -1; i < word.length(); i++) {
+                 Node lastNode = suffixTrie.root;
+                 for (int j = i + 1; j < word.length(); j++) {
+                     lastNode = suffixTrie.insert(word.charAt(j), j == word.length() - 1, lastNode);
+                 }
+             }
          }
-        
-        System.out.println(suffixTrie.searchWholeWord("lmn"));
+         System.out.println(suffixTrie.searchPattern("lmc"));
+         System.out.println(suffixTrie.searchWholeWord("lmn"));
      }
      
-     void insert(String word) {
-         
-         Node lastNode = root;
-         int countOfChars = 1;
-         for (char ch: word.toCharArray()) {
-             Node runner = lastNode;
-             while (runner.children != null && runner.children.containsKey(ch)) {
-                 countOfChars++;
-                 runner = runner.children.get(ch);
-                 lastNode = runner;
+     Node insert(char ch, boolean isWordEnd, Node lastNode) {
+         if (lastNode.children.containsKey(ch)) {
+             lastNode = lastNode.children.get(ch);
+             if (isWordEnd) {
+                 lastNode.endWord = isWordEnd;
              }
-             System.out.println();
-             if (lastNode.children == null) {
-                lastNode.children = new HashMap<>();
-             } 
-
-             countOfChars++;
-             Node emptyNode = new Node();
-             lastNode.children.put(ch, emptyNode);
-             if (countOfChars == word.length()) {
-                emptyNode.endWord = true;
-            }
+             return lastNode;
          }
-         System.out.println(root.children);
+
+         Node emptyNode = new Node();
+         emptyNode.endWord = isWordEnd;
+         lastNode.children.put(ch, emptyNode);
+         return emptyNode;
      }
 
      
      boolean searchWholeWord(String word) {
-         Node runner = root; 
-         Node lastSearchedNode = runner;
-         
+         Node runner = root;
+         Node lastSearchedNode = root;
+
          char[] charsOfWord = word.toCharArray();
-         int matchedCharCount = 0; 
+         int matchedCharCount = 0;
          for (char ch: charsOfWord) {
-             if (runner.children != null && runner.children.containsKey(ch)) {
+             if (runner.children.containsKey(ch)) {
                  runner = runner.children.get(ch);
                  lastSearchedNode = runner;
                  matchedCharCount++;
              }
          }
-         
-        System.out.println(matchedCharCount);
+
+         System.out.println(matchedCharCount);
          return lastSearchedNode.endWord && matchedCharCount == word.length();
      }
+
+    boolean searchPattern(String word) {
+        Node runner = root;
+
+        char[] charsOfWord = word.toCharArray();
+        int matchedCharCount = 0;
+        for (char ch: charsOfWord) {
+            if (runner.children.containsKey(ch)) {
+                runner = runner.children.get(ch);
+                matchedCharCount++;
+            }
+        }
+
+        System.out.println(matchedCharCount);
+        return matchedCharCount == word.length();
+    }
 }
