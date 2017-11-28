@@ -1,69 +1,61 @@
 package solutions;
 
-import org.omg.CORBA.INTERNAL;
+import java.util.*;
 
-import java.util.Scanner;
-
-class GFG {
-
+public class GFG {
     public static void main (String[] args) {
         Scanner sc = new Scanner(System.in);
         int T = sc.nextInt();
-        sc.nextLine();
-        String[][] input = new String[T][];
+        int[][] input = new int[T][];
         for (int i=0; i<T; i++) {
-            input[i] = new String[]{sc.nextLine(), sc.nextLine()};
+            int n = sc.nextInt();
+            input[i] = new int[n];
+            for (int j=0; j<n; j++) {
+                input[i][j] = sc.nextInt();
+            }
         }
-//        2
-//        7 3
-//        2 1 3 5 0 1 4
-//        6 2
-//        1 6 2 5 3 4
-
         for (int i=0; i<T; i++) {
-            int maxSum = getMaxSum(input[i][0], input[i][1]);
-            System.out.println(maxSum);
+            getPairsOfPositiveAndNegative_WithHash(input[i]);
         }
     }
 
-
-    static int getMaxSum(String sizeSec, String values) {
-
-        int maxTrees =  Integer.parseInt(sizeSec.split("\\s")[1]);
-        int maxSum = findMax(maxTrees, values.split("\\s"));
-//        int maxSum = knapSack(maxTrees, values.split("\\s"));
-
-        return maxSum;
+    static void getPairsOfPositiveAndNegative_WithHash(int[] input) {
+        int[] hash = new int[1001];
+        boolean found = false;
+        for (int i=0; i<input.length; i++) {
+            int currentEle = input[i];
+            int absCurrentEle = Math.abs(currentEle);
+            if (hash[absCurrentEle] + currentEle == 0) {
+                found = true;
+                System.out.format("%d %d ", absCurrentEle, -absCurrentEle);
+            }
+            hash[absCurrentEle] = currentEle;
+        }
+        if (!found)
+            System.out.print("0");
+        System.out.println();    
     }
 
-    static int knapSack(int n, String[] values) {
-        int[][] k = new int[values.length+1][n+1];
+    static Set<Integer> getPairsOfPositiveAndNegative_WithArray(int[] input) {
+        Set<Integer> pairs = new HashSet();
+        int[] pair = new int[1001];
 
-        for (int i=0; i<=values.length; i++) {
-            for (int j=0; j<=n; j++) {
-                if (i == 0 || j == 0) {
-                    k[i][j] = 0;
-                } else {
-                    int currentValue = Integer.parseInt(values[i-1]);
-                    int currentMaxValue = k[i-1][j-1] + currentValue;
-
-                    if (currentMaxValue > k[i-1][j]) {
-                        k[i][j] = currentMaxValue;
-                    } else {
-                        k[i][j] = k[i-1][j];
-                    }
+        for (int i=0; i<input.length; i++) {
+            int currentEle = input[i];
+            if (currentEle > 0) {
+                if (pair[currentEle] < 0) {
+                    pairs.add(currentEle);
                 }
+                pair[currentEle] = 1; 
+            } else {
+                if (pair[-currentEle] > 0) {
+                    pairs.add(-currentEle);
+                }
+                pair[-currentEle] = -1; 
             }
         }
 
-        return k[values.length][n];
-    }
-
-    static int findMax(int n, String[] values) {
-        if (n == 0 || n >= values.length) {
-            return 0;
-        }
-        return  Math.max(Integer.parseInt(values[n]) + findMax(n - 1, values), findMax(n - 1, values));
+        return pairs;
     }
 
 }
