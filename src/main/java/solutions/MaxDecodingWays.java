@@ -2,7 +2,7 @@ package solutions;
 
 import java.util.*;
 
-public class GFG {
+public class MaxDecodingWays {
         public static void main (String[] args) {
             // Scanner sc = new Scanner(System.in);
             // int T = sc.nextInt();
@@ -42,11 +42,13 @@ public class GFG {
         }  
         
         static int findMaxWaysToDecodeDP(String input, int n) {
+        {
             int[] count = new int[n+1]; // A table to store results of subproblems
             count[0] = 1;
             count[1] = 1;
          
-            for (int i = 2; i <= n; i++) {
+            for (int i = 2; i <= n; i++)
+            {
                 count[i] = 0;
          
                 // If the last digit is not 0, then last digit must add to

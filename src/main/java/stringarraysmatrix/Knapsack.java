@@ -46,7 +46,7 @@ public class Knapsack {
     }
 
     public void knapsack(int [] weights, int[] values, int capacity) {
-        int[][] k = new int[weights.length+1][capacity+1]
+        int[][] k = new int[weights.length+1][capacity+1];
 
         for (int i=0; i<weights.length; i++) {
             for (int w=0; w<capacity+1; w++) {
@@ -54,7 +54,7 @@ public class Knapsack {
                     k[i][w] = 0;
                 }
                 if (k[i-1][0] <= capacity) {
-                    k[i][w] = Math.max(values[i-1] + k[i-1][w - weights[i]], k[i-1][w])
+                    k[i][w] = Math.max(values[i-1] + k[i-1][w - weights[i]], k[i-1][w]);
                 } else {
                     k[i][w] = k[i-1][w];
                 }
