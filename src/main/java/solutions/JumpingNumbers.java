@@ -12,7 +12,7 @@ class JumpingNumbers {
         for (int i=0; i<T; i++) {
             input[i] = sc.nextInt();
         }
-
+    
         for (int i=0; i<T; i++) {
             printJumptingNumbers(input[i]);
             System.out.println();

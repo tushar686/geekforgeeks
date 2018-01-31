@@ -1,5 +1,7 @@
 package ds;
 
+import java.util.Random;
+
 /**
  * Created by ts250370 on 8/19/17.
  */
@@ -35,22 +37,22 @@ public class Heap {
     public static void main(String[] args) {
         Heap heap = new Heap();
 
-        heap.insert(heap.new Node(18));
-        heap.insert(heap.new Node(16));
-        heap.insert(heap.new Node(15));
-        heap.insert(heap.new Node(17));
-        heap.insert(heap.new Node(24));
-        heap.insert(heap.new Node(19));
-        heap.insert(heap.new Node(29));
-        heap.insert(heap.new Node(27));
-        heap.insert(heap.new Node(26));
-        heap.insert(heap.new Node(30));
-        System.out.println(heap.getMin());
+        Random random = new Random(50);
+        for (int i=0; i<heap.INPUT_SIZE; i++) {
+            Node node = heap.new Node(random.nextInt(50) + 1);
+            heap.insert(node);
+            // heap.heapifyBottomUp(node, heap.count-1);
+        }
+        for (int i=0; i<heap.count/2; i++) {
+            heap.heapifyTopDownForInsertion(i);
+        }
+
+        System.out.println(heap.getMin().priority);
 
         for (int i=0; i<heap.INPUT_SIZE; i++) {
             System.out.print(heap.deleteMin().priority + " ");
-            
         }
+        System.out.println();
     }
 
     public Node getMin() {
@@ -81,8 +83,30 @@ public class Heap {
 
     public void insert(Node node) {
         heap[count] = node;
-        heapifyBottomUp(node, count);
         count++;
+    }
+
+    private void heapifyTopDownForInsertion(int currentPos) {
+            if (count >= 2*currentPos+1 && count > 2*currentPos+2) {
+                int minChildPos = min(2*currentPos+1, 2*currentPos+2);
+                if (heap[currentPos].priority > heap[minChildPos].priority) {
+                    swap(currentPos, minChildPos);
+                    heapifyTopDownForInsertion( (currentPos-1) / 2);
+                }
+            } else if(2*currentPos + 1 <= count) {
+                if (heap[currentPos].priority > heap[2*currentPos + 1].priority) {
+                    swap(currentPos, 2*currentPos + 1);
+                    heapifyTopDownForInsertion(currentPos-1/2);
+                }
+            }
+            
+    }
+
+    private int min(int pos1, int pos2) {
+        if (heap[pos1].priority < heap[pos2].priority) {
+            return pos1;
+        }
+        return pos2;
     }
 
     private void heapifyBottomUp(Node node, int pos) {

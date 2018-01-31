@@ -1,114 +1,128 @@
 package sort;
 
 import java.util.Random;
-import java.util.Scanner;
 
 /**
- * Created by ts250370 on 7/23/17.
+ * Created by ts250370 on 8/19/17.
  */
-public class HeapSort {
 
-    private static int INPUT_SIZE = 10;
-    int [] input = new int[INPUT_SIZE+1];
+public class HeapSort {
+    public class Node {
+        public double priority;
+        public Object data;
+
+        public Node(int priority) {
+            this.priority = priority;
+        }
+        
+        public Node(int priority, Object data) {
+            this.priority = priority;
+            this.data = data;
+        }
+    }
+
+    Node[] heap;
+    int INPUT_SIZE;
+    int count = 0;
+
+    public HeapSort() {
+        this.INPUT_SIZE = 10;
+        this.heap = new Node[INPUT_SIZE];
+    }
+
+    public HeapSort(int size) {
+        this.heap = new Node[size];
+    }
 
     public static void main(String[] args) {
-        HeapSort heapSort = new HeapSort();
-        heapSort.initializeInput();
-        heapSort.print(1, INPUT_SIZE);
-        heapSort.sort();
-    }
+        HeapSort heap = new HeapSort();
 
-    private void initializeInput() {
         Random random = new Random(50);
-        for (int i=0; i<INPUT_SIZE; i++) {
-            input[i] = random.nextInt(50) + 1;
+        for (int i=0; i<heap.INPUT_SIZE; i++) {
+            Node node = heap.new Node(random.nextInt(50) + 1);
+            heap.insert(node);
+            // heap.heapifyBottomUp(node, heap.count-1);
+        }
+        for (int i=0; i<heap.count/2; i++) {
+            heap.heapifyTopDownForInsertion(i);
+        }
+
+        System.out.println(heap.getMin().priority);
+
+        for (int i=0; i<heap.INPUT_SIZE; i++) {
+            System.out.print(heap.deleteMin().priority + " ");
+        }
+        System.out.println();
+    }
+
+    public Node getMin() {
+        return heap[0];
+    }
+
+    public Node deleteMin() {
+        count--;
+        Node min = heap[0];
+
+        heap[0] = heap[count];
+        heapifyTopDown(0);
+
+        return min;
+    }
+
+    private void heapifyTopDown(int pos) {
+        if (pos < count/2 && heap[pos].priority > Math.min(heap[2*pos + 1].priority, heap[2*pos + 2].priority)) {
+            if (heap[2*pos + 1].priority < heap[2*pos + 2].priority) {
+                swap(pos, 2*pos + 1);
+                heapifyTopDown(2*pos + 1);
+            } else {
+                swap(pos, 2*pos + 2);
+                heapifyTopDown(2*pos + 2);
+            }
         }
     }
 
-    private void print(int i, int size) {
-        if(i > size) {
-            System.out.println();
-            return;
+    public void insert(Node node) {
+        heap[count] = node;
+        count++;
+    }
+
+    private void heapifyTopDownForInsertion(int currentPos) {
+            if (count >= 2*currentPos+1 && count > 2*currentPos+2) {
+                int minChildPos = min(2*currentPos+1, 2*currentPos+2);
+                if (heap[currentPos].priority > heap[minChildPos].priority) {
+                    swap(currentPos, minChildPos);
+                    heapifyTopDownForInsertion( (currentPos-1) / 2);
+                }
+            } else if(2*currentPos + 1 <= count) {
+                if (heap[currentPos].priority > heap[2*currentPos + 1].priority) {
+                    swap(currentPos, 2*currentPos + 1);
+                    heapifyTopDownForInsertion(currentPos-1/2);
+                }
+            }
+            
+    }
+
+    private int min(int pos1, int pos2) {
+        if (heap[pos1].priority < heap[pos2].priority) {
+            return pos1;
         }
-        System.out.print(input[i] + " ");
-        print(i+1, size);
+        return pos2;
     }
 
-    private void sort() {
-        int noOfNodes = INPUT_SIZE;
-        int heapRoot = 1;
-        System.out.printf("%d=%d\n", heapRoot, input[heapRoot]);
+    private void heapifyBottomUp(Node node, int pos) {
+        heap[pos] = node;
+        int root = (pos-1)/2;
 
-//        print(1, noOfNodes);
-//        for (int i=noOfNodes; i>heapRoot; i -= 1) {
-//            bubbleUp(i, heapRoot, noOfNodes);
-//        }
-//        print(1, noOfNodes);
-
-        print(1, noOfNodes);
-        for (int i=1; i<=Math.floorDiv(noOfNodes, 2); i += 1) {
-            bubbleDown(i, heapRoot, noOfNodes);
+        if (heap[root].priority > node.priority) {
+            swap(root, pos);
+            heapifyBottomUp(heap[root], root);
         }
-        print(1, noOfNodes);
-    }
-
-    private void bubbleUp(int eleIndex, int heapRoot, int noOfNodes) {
-        int eleRootIndex = Math.floorDiv(eleIndex, 2);
-
-        if ( (eleRootIndex*2 > heapRoot) && input[eleRootIndex] > input[eleRootIndex*2]) {
-            swap(eleRootIndex, eleRootIndex * 2);
-        } else if ((eleRootIndex*2+1)<= noOfNodes && input[eleRootIndex] > input[eleRootIndex*2+1]) {
-            swap(eleRootIndex, eleRootIndex * 2+1);
-        }
-    }
-
-    private void bubbleDown(int eleIndex, int heapRoot, int noOfNodes) {
-        int eleRootIndex = Math.floorDiv(eleIndex, 2) == 0 ? 1 : Math.floorDiv(eleIndex, 2);
-//        System.out.printf("root of %d=%d\n", eleIndex, eleRootIndex);
-
-        if ( (eleRootIndex*2 <= noOfNodes) && input[eleRootIndex] > input[eleRootIndex*2]) {
-            swap(eleRootIndex, eleRootIndex * 2);
-        } else if ((eleRootIndex*2+1)<= noOfNodes && input[eleRootIndex] > input[eleRootIndex*2+1]) {
-            swap(eleRootIndex, eleRootIndex * 2+1);
-        }
-    }
-
-    private int getMin(int noOfNodes) {
-        return input[Math.floorDiv(noOfNodes,2)];
-    }
-
-
-    private void swap(int i, int j) {
-        int temp;
-        temp = input[i];
-        input[i] = input[j];
-        input[j] = temp;
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    private void swap(int root, int count) {
+        Node temp = heap[root];
+        heap[root] = heap[count];
+        heap[count] = temp;    
+    }
 }

@@ -23,6 +23,7 @@ public class RadixSort {
     }
 
     private void sort() {
+        findDigitAtMy(1023, 4);
         for (int k = 0; k < maxDigit; k++) {
             range = new LinkedList[] {null, null, null, null, null, null, null, null, null, null};
             int n = 0;
@@ -45,16 +46,6 @@ public class RadixSort {
             }
         }
     }
-
-//    private int findDigitAt(int number, int pos) {
-//        for (int i=0; i<pos; i++) {
-//            number = number / 10;
-//        }
-//        if(number > 0) {
-//            number = number % 10;
-//        }
-//        return number;
-//    }
     
 
      private int findDigitAt(int number, int pos) {
@@ -65,33 +56,33 @@ public class RadixSort {
          }
      }
 
-//    private int findDigitAt(int number, int maxDigits) {
-//        int prevQutient = 0;
-//        for(int pos=maxDigits; pos>-1; pos--) {
-//            int pow = (int) Math.pow(10, pos);  // 1000 = 10, 3
-//                                                //100 = 10, 2
-//                                               //10 = 10, 1
-//                                               //1 = 10, 0
-//
-//            int quotient = number / pow;   // 4 = 4253 / 1000
-//                                          // 42 = 4253 / 100
-//                                         // 425 = 4253 / 10
-//                                        // 4253 = 4253 / 1
-//
-//            int prevQutientTimes10 = prevQutient * 10;  // 0 = 4 * 0
-//                                        // 40 = 4 * 10
-//                                        // 420 = 42 * 10
-//                                        // 4250 = 425 * 10
-//
-//            int digit = quotient - prevQutientTimes10;   // 4 = 4 - 0
-//                                                        // 2 = 42 - 40
-//                                                        // 5 = 425 - 420
-//                                                        // 3 = 4253 - 4250
-//
-//            prevQutient = quotient; // 4, 42, 425, 4253
-//            System.out.println(digit);
-//        }
-//        return 0;
-//    }
+   private int findDigitAtMy(int number, int maxDigits) {
+       int prevQutient = 0;
+       for(int pos=maxDigits; pos>-1; pos--) {
+           int pow = (int) Math.pow(10, pos);  // 1000 = 10, 3
+                                               //100 = 10, 2
+                                              //10 = 10, 1
+                                              //1 = 10, 0
+
+           int quotient = number / pow;   // 4 = 4253 / 1000
+                                         // 42 = 4253 / 100
+                                        // 425 = 4253 / 10
+                                       // 4253 = 4253 / 1
+
+           int prevQutientTimes10 = prevQutient * 10;  // 0 = 4 * 0
+                                       // 40 = 4 * 10
+                                       // 420 = 42 * 10
+                                       // 4250 = 425 * 10
+
+           int digit = quotient - prevQutientTimes10;   // 4 = 4 - 0
+                                                       // 2 = 42 - 40
+                                                       // 5 = 425 - 420
+                                                       // 3 = 4253 - 4250
+
+           prevQutient = quotient; // 4, 42, 425, 4253
+           System.out.println(digit);
+       }
+       return 0;
+   }
 
 }

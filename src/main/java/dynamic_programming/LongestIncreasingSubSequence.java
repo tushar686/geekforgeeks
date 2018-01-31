@@ -1,6 +1,4 @@
-package stringarraysmatrix;
-
-import java.util.Arrays;
+package dynamic_programming;
 
 public class LongestIncreasingSubSequence {
     

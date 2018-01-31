@@ -4,61 +4,54 @@ import java.util.*;
 
 public class GFG {
         public static void main (String[] args) {
-            // Scanner sc = new Scanner(System.in);
-            // int T = sc.nextInt();
-            // String[] input = new String[T];
-            // for (int i=0; i<T; i+=1) {
-            //     int n = sc.nextInt();
-            //     input[i] = sc.next();
-            // }
+            Scanner sc = new Scanner(System.in);
+            int T = sc.nextInt();
+            int[] input = new int[T];
 
-            // for (int i=0; i<T; i+=1) {
-            //     int result = findMaxWaysToDecode(input[i], input[i].length());
-            //     System.out.println(result);
-            // }
 
-            String input = "1210";
-            int result = findMaxWaysToDecode(input, input.length());
-            System.out.println(result);
+            String[] numbers = new String[21];
+            numbers[1] = "1";
+            numbers[2] = "11";
+            numbers[3] = "21";
+            for (int i=4; i<21; i++) {
+                String prev = numbers[i-1];
+                String sb = new String();
+                for (int j=prev.length()-1; j>=0; ) {
+                    if (prev.charAt(j) == '1') {
+                        if ( (j-1) >= 0) {
+                            if (prev.charAt(j-1) == '1') { //11
+                                sb = "21" + sb;
+                                j -= 2; 
+                            } else { //21
+                                sb = "11" + sb;
+                                j -= 1; 
+                            }
+                        } else { //last char of prev String is '1'
+                            sb = "11" + sb;
+                            j -= 1; 
+                        }
+                    } else {
+                        sb = "12" + sb;
+                        j -= 1; 
+                    }
+                }
+                numbers[i] = sb;
+            }
+
+//            for (int i=0; i<T; i+=1) {
+//                input[i] = sc.nextInt();
+//                String result = numbers[input[i]];
+//                System.out.println(result);
+//            }
+
+            for (int i=0; i<T; i+=1) {
+                input[i] = sc.nextInt();
+            }
+            for (int k=0; k<T; k+=1) {
+                String result = numbers[input[k]];
+                System.out.println(result);
+            }
+
         }
 
-        static int findMaxWaysToDecode(String input, int n) {
-            if (n == 0 || n == 1) {
-                return 1;
-            }
-            int result = 0;
-
-            // If the last digit is not 0, then last digit must add to
-            // the number of words
-            if ( input.charAt(n-1) != '0')
-                result =  findMaxWaysToDecode(input, n-1);
-             
-                // If the last two digits form a number smaller than or equal to 26,
-                // then consider last two digits and recur
-                if (input.charAt(n-2) == '1' || (input.charAt(n-2) == '2' && Integer.parseInt(Character.toString(input.charAt(n-1))) < 7) )
-                    result +=  findMaxWaysToDecode(input, n-2);
-             
-            return result;
-        }  
-        
-        static int findMaxWaysToDecodeDP(String input, int n) {
-            int[] count = new int[n+1]; // A table to store results of subproblems
-            count[0] = 1;
-            count[1] = 1;
-         
-            for (int i = 2; i <= n; i++) {
-                count[i] = 0;
-         
-                // If the last digit is not 0, then last digit must add to
-                // the number of words
-                if (input.charAt(i-1) > '0')
-                    count[i] = count[i-1];
-         
-                // If second last digit is smaller than 2 and last digit is
-                // smaller than 7, then last two digits form a valid character
-                if (input.charAt(i-2) == '1' || (input.charAt(i-2) == '2' && input.charAt(i-1) < '7') )
-                    count[i] += count[i-2];
-            }
-            return count[n];
-        }
 }

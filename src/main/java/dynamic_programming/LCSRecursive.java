@@ -1,4 +1,4 @@
-package stringarraysmatrix;
+package dynamic_programming;
 
 public class LCSRecursive{
 

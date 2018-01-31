@@ -1,4 +1,4 @@
-package stringarraysmatrix;
+package dynamic_programming;
 
 /**
  * Created by ts250370 on 8/15/17.
@@ -53,6 +53,7 @@ public class Knapsack {
                 if (i == 0 || w == 0) {
                     k[i][w] = 0;
                 }
+                //weights[i-1] <= w
                 if (k[i-1][0] <= capacity) {
                     k[i][w] = Math.max(values[i-1] + k[i-1][w - weights[i]], k[i-1][w]);
                 } else {

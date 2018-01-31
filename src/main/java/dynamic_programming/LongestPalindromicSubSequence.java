@@ -1,12 +1,12 @@
-package stringarraysmatrix;
+package dynamic_programming;
 
-public class LongestPalindromeSubstring {
+public class LongestPalindromicSubSequence {
     public static void main(String[] args) {
-        int length = findLongestCommonSubstring("agbdba");
+        int length = findLongestPalindromicSubSequence("agbdba");
         System.out.println(length);
     }
 
-    public static int findLongestCommonSubstring(String input) {
+    static int findLongestPalindromicSubSequence(String input) {
         int n = input.length();
         int[][] lps = new int[n][n];
         for (int i=0; i<n; i++) {
@@ -23,7 +23,7 @@ public class LongestPalindromeSubstring {
                         maxLen = lps[start][end];
                     }
                 } else {
-                    lps[start][end] = 0;
+                    lps[start][end] = Math.max(lps[start][end-1], lps[start+1][end]);
                 }
             }
         }

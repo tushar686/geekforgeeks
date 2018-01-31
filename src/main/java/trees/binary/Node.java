@@ -6,8 +6,8 @@ import java.util.Objects;
  * Created by ts250370 on 8/17/17.
  */
 public class Node {
-    Object data;
-    int key;
+    public Object data;
+    public int key;
     public Node leftChild;
     public Node rightChild;
     public Node parent;
