@@ -32,7 +32,7 @@ output = [ 1, 2, 1000 ]
             int resultCount = 0;
 
             int countSecond = 0;
-            int first=0
+            int first=0;
             int gap = 10;
 
             for (; first < a1.length && countSecond < a2.length; ) {
@@ -41,7 +41,7 @@ output = [ 1, 2, 1000 ]
                 } else if (a1[first] > a2[countSecond] ) {
                     countSecond++; // countSecond+= gap;
                 } else {
-                    result[resultCount++] = a1[first]
+                    result[resultCount++] = a1[first];
                     first++;
                     countSecond++;
                 }
@@ -51,22 +51,22 @@ output = [ 1, 2, 1000 ]
         }
 
         static int[] findCommon_1(int[] a1, int[] a2) {
-            int[] result = Math.min(a1.length, a2.length);
+            int[] result = new int[Math.min(a1.length, a2.length)];
             int resultCount = 0;
 
             int countSecond = 0;
-            int first=0
+            int first = 0;
             int gap = 10;
 
             for (; first < a1.length && countSecond < a2.length; ) {
-                if (a1[first] != a2[countSecond] ){
+                if (a1[first] != a2[countSecond] ) {
                     if (scan(first, countSecond, gap)) {
-                        result[resultCount++] = a1[first]
+                        result[resultCount++] = a1[first];
                         first++;
                         countSecond++;
                     }
                 } else {
-                    result[resultCount++] = a1[first]
+                    result[resultCount++] = a1[first];
                     first++;
                     countSecond++;
                 }
@@ -75,15 +75,15 @@ output = [ 1, 2, 1000 ]
             return result;
         }
 
-        scan(first, countSecond, gap) {
-            if (a1.first < a2.gap) {
-                scan(first, countSecond, g=gap/2);
-            }
-            if a1.first > a2.gap {
-                a2.gap, prevGap;
-            }
-            if matches return true;
-
+        static boolean scan(int first, int countSecond, int gap) {
+//            if (a1.first < a2.gap) {
+//                scan(first, countSecond, g=gap/2);
+//            }
+//            if a1.first > a2.gap {
+//                a2.gap, prevGap;
+//            }
+//            if matches return true;
+            return false;
 
         }
 

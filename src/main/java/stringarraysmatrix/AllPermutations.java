@@ -21,10 +21,14 @@ public class AllPermutations {
         allPermutations.allPermutations(input, 0, new char[4], new int[] {1, 1, 1, 1});
         System.out.println("==================");
         allPermutations.DFSPermutations(vertices, new char[vertices.length], 0);
-        
-        //       allPermutations.allCombinations(input, 0, new char[3], new int[] {1, 1, 1});
+
         System.out.println("==================");
-       allPermutations.DFSCombinations(vertices, 0, 0, new char[input.length()]);
+        System.out.println("==================");
+        input = "abcde";
+        allPermutations.allCombinations(input, 0, 0, new char[5], new int[] {1, 1, 1, 1, 1});
+        System.out.println("==================");
+        input = "ABCD";
+        allPermutations.DFSCombinations(vertices, 0, 0, new char[input.length()]);
     }
 
     public void allPermutations(String input, int depth, char [] output, int [] charCount) {
@@ -44,23 +48,23 @@ public class AllPermutations {
         }
     }
 
-    public void allCombinations(String input, int depth, char [] output, int [] charCount) {
+    public void allCombinations(String input, int depth, int pos, char [] output, int [] charCount) {
         if (depth == input.length()) {
             return;
         }
 
-        for (int i=0; i<input.length(); ++i) {
+        for (int i=pos; i<input.length(); ++i) {
             if (charCount[i] > 0) {
                 output[depth] = input.charAt(i);
+                charCount[i] -=1; //visited
+
                 for (int k=0; k<=depth; k++) {
                     System.out.print(output[k]);
                 }
                 System.out.println();
-                depth++;
-                charCount[i]--;
-                allCombinations(input, depth, output, charCount);
-                charCount[i]++;
-                depth--;
+
+                allCombinations(input, depth+1, i+1, output, charCount);
+                charCount[i] +=1; //not visited
             }
         }
     }

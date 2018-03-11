@@ -1,11 +1,14 @@
 package graphs;
 
+import java.util.List;
+
 /**
  * Created by ts250370 on 7/28/17.
  */
 public class Vertex {
     public int label;
     public int[] adjacentVertices;
+    public List<Vertex>[] adjacentVerticesList;
     public int treeEdges[];
     public int backEdges[];
     public int entryTime;
