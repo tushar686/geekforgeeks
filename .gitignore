@@ -18,3 +18,10 @@ buildNumber.properties
 *.iml
 out
 gen
+
+# visual studio code project files
+.classpath
+.project
+.settings/
+src/.vscode
+.vscode/
