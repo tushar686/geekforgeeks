@@ -25,6 +25,13 @@ public class StreamExample {
 
         System.out.println(stream.count());
 
+        int sum = list.stream()
+                .limit(2)
+                .reduce(0, Integer::sum);
+
+
+        System.out.println(sum);
+
 
     }
 }

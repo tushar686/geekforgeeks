@@ -5,34 +5,14 @@ package jdk;
  */
 public class Closure {
 
-    interface ProcessIF {
-        void process(int i);
+    @FunctionalInterface
+    interface MultiplyIF {
+        void multiply(int i);
     }
-
-
 
     public static void main(String[] args) {
-        Closure closure = new Closure();
-        closure.instanceTest();
-    }
-
-
-    private void instanceTest() {
-        int a = 10;
-        int b = 20;
-
-        doProcess(a, new ProcessIF() {
-            @Override
-            public void process(int i) {
-                System.out.println(i + b);
-            }
-        });
-
-        doProcess(a, (x)->System.out.println(x + b) );
-    }
-
-    static void doProcess(int i, ProcessIF process) {
-        process.process(i);
+        MultiplyIF multiplyBy10 = (x) -> { System.out.println( x * 10 ); };
+        multiplyBy10.multiply(20);
     }
 }
 
