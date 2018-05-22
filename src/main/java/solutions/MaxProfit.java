@@ -7,7 +7,8 @@ import java.util.Stack;
 
 public class MaxProfit {
     public static void main(String args []) {
-        int[] prices = {10, 22, 5, 75, 65, 80}; //97 - 87
+//        int[] prices = {10, 22, 5, 75, 65, 80}; //97 - 87
+          int[] prices = {100, 22, 5, 75, 65, 80}; //97 - 87
 //        int[] prices = {10, 22, 5, 75, 3, 100}; //179 - 167
 //        int[] prices = {100, 80, 10, 20, 10, 70, 90}; //90
 //        int[] prices = {2, 30, 15, 10, 8, 25, 80}; //100
@@ -16,8 +17,8 @@ public class MaxProfit {
 
 //        int maxProfit = maxProfitMultipleChoice_with_stack(prices);
 //        int maxProfit = maxProfit_Multiple__BuyAndSell_without_stack(prices);
-//        int maxProfit = maxProfit_Twice_BuyAndSell(prices);
-        int maxProfit = maxProfit_k_BuyAndSell(prices, 3);
+        int maxProfit = maxProfit_Twice_BuyAndSell_2(prices);
+//        int maxProfit = maxProfit_k_BuyAndSell(prices, 3);
         System.out.println(maxProfit);
     }
 
@@ -141,6 +142,32 @@ public class MaxProfit {
         }
 
         return  maxProfit;
+    }
+
+    static int maxProfit_Twice_BuyAndSell_2(int[] prices) {
+        int[] profit = new int[prices.length];
+        int n = prices.length;
+
+        int max = prices[n-1];
+        for (int i = n-2; i >= 0 ; i--) {
+            if (prices[i] > max) {
+                max = prices[i];
+            }
+
+            profit[i] = Math.max(profit[i+1], max - prices[i]);
+        }
+
+        int min = prices[0];
+        for (int i = 1; i < n; i++) {
+            if (prices[i] < min) {
+                min = prices[i];
+            }
+
+            profit[i] = Math.max(profit[i-1], profit[i] +  prices[i] - min);
+        }
+
+
+        return  profit[n-1];
     }
 
     static int maxProfit_k_BuyAndSell(int [] prices, int k) {
