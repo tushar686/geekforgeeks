@@ -1,6 +1,6 @@
 package trees.binary;
 
-import linkedlist.LinkedList;
+import list.LinkedList;
 
 /**
  * Created by ts250370 on 9/13/17.

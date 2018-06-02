@@ -1,6 +1,6 @@
 package sort;
 
-import linkedlist.LinkedList;
+import list.LinkedList;
 
 /**
  * Created by ts250370 on 8/21/17.

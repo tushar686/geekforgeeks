@@ -1,6 +1,6 @@
 package hashing;
 
-import linkedlist.LinkedList;
+import list.LinkedList;
 
 import java.util.Scanner;
 

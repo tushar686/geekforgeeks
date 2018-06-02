@@ -1,6 +1,6 @@
 package graphs;
 
-import linkedlist.LinkedList;
+import list.LinkedList;
 
 /**
  * Created by ts250370 on 7/28/17.
