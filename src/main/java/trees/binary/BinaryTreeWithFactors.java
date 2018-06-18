@@ -1,4 +1,4 @@
-package solutions;
+package trees.binary;
 
 import java.util.*;
 

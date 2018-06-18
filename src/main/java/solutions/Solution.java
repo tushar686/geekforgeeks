@@ -6,42 +6,25 @@ import java.util.*;
 public class Solution {
 
     public static void main(String[] args) {
-        long start = Calendar.getInstance().getTimeInMillis();
         Solution solution = new Solution();
-        boolean r = solution.isPalindrome(1221);
-        System.out.println(r);
+        System.out.println(solution.uniquePaths(7, 3));
     }
 
-    public boolean isPalindrome(int x) {
-        if (x < 0) {
-            return false;
-        }
-        int len = -1;
-        int num = x;
-        while (num != 0) {
-            num = num / 10;
-            len++;
-        }
-        System.out.println(len);
-
-        num = x;
-        int limit = len;
-        while (len > 0) {
-            int left = num  / ((int) Math.pow(10, len));
-            int right = num % 10;
-            System.out.println("num: " + num);
-            System.out.println("\tleft: " + left + " right: " + right);
-            if (left != right) {
-                return false;
-            }
-            num = num - (((int) Math.pow(10, len)) * left) ;
-            System.out.println(num);
-            num = num / 10;
-            System.out.println(num);
-            len = len - 2;
-        }
-
-
-        return true;
+    public int uniquePaths(int m, int n) {
+        return calculatePaths(0, 0, m, n);
     }
+
+    int calculatePaths(int i, int j, int m, int n) {
+        if (i == m-1 && j == n-1) {
+            return 1;
+        }
+        if (i == m || j == n || i > m || j > n) {
+            return 0;
+        }
+
+
+        return calculatePaths(i+1, j, m, n) + calculatePaths(i, j+1, m, n);
+    }
+
+
 }
